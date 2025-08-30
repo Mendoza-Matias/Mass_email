@@ -37,7 +37,7 @@ public class MailSenderService {
         this.javaMailSender = javaMailSender;
     }
 
-    @Scheduled(cron = "0 0/1 * * * ?") // Cada minuto
+    @Scheduled(cron = "0 0/24 * * * ?")
     public void sendEmails() {
         List<User> pendings = userService.getRecordsByQuantity(MAIL_QUANTITY);
         if (pendings.isEmpty()) {
@@ -81,7 +81,7 @@ public class MailSenderService {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setSubject("RECORDATORIO");
         helper.setTo(user.getEmail());
-        helper.setText(user.getMessage(), true); 
+        helper.setText(user.getMessage(), true);
         helper.setFrom(MAIL_SENDER);
         return message;
     }
