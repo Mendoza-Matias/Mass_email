@@ -37,7 +37,7 @@ public class MailSenderService {
         this.javaMailSender = javaMailSender;
     }
 
-    @Scheduled(cron = "0 0/60 * * * ?") //Se ejecuta cada hora
+    @Scheduled(cron = "0 0/1 * * * ?") //Se ejecuta cada hora
     public void sendEmails() {
         List<User> pendings = userService.getRecordsByQuantity(MAIL_QUANTITY);
         if (pendings.isEmpty()) {
